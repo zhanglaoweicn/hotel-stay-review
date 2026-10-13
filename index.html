@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<title>住得好 · 好评文案助手</title>
+<style>
+:root{
+  --purple:#6C5CE7;
+  --purple-2:#8B7BFF;
+  --purple-deep:#4B3FBF;
+  --purple-soft:#F1EEFF;
+  --ink:#1F1B2E;
+  --ink-2:#6B6480;
+  --ink-3:#9C97AD;
+  --line:#EFEDF8;
+  --card:#FFFFFF;
+  --page:#F6F5FB;
+  --gold:#FFB400;
+  --green:#18A058;
+  --green-bg:#E8F7EF;
+  --blue:#3F6FEA;
+  --orange:#F0883A;
+  --radius:14px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue","Microsoft YaHei",sans-serif;
+  background:var(--page);
+  color:var(--ink);
+  font-size:15px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:env(safe-area-inset-bottom);
+}
+.app{
+  max-width:430px;
+  margin:0 auto;
+  background:var(--page);
+  min-height:100vh;
+  position:relative;
+  overflow-x:hidden;
+}
+@media(min-width:520px){
+  body{background:#E9E7F4;}
+  .app{box-shadow:0 8px 40px rgba(60,50,120,.14);min-height:100vh;}
+}
+
+/* ---------- 头部 ---------- */
+.hero{
+  background:linear-gradient(150deg,#6C5CE7 0%,#8878FF 55%,#A895FF 100%);
+  padding:26px 22px 62px;
+  color:#fff;
+  position:relative;
+  overflow:hidden;
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  right:-58px;top:-58px;
+  width:180px;height:180px;
+  border-radius:50%;
+  background:rgba(255,255,255,.10);
+}
+.hero::before{
+  content:"";
+  position:absolute;
+  right:36px;top:74px;
+  width:76px;height:76px;
+  border-radius:50%;
+  background:rgba(255,255,255,.08);
+}
+.hero h1{
+  margin:0;
+  font-size:21px;
+  font-weight:600;
+  letter-spacing:.5px;
+  position:relative;
+  z-index:1;
+}
+.hero p{
+  margin:7px 0 0;
+  font-size:12.5px;
+  opacity:.88;
+  position:relative;
+  z-index:1;
+}
+.hero .badge{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  margin-top:14px;
+  padding:4px 11px;
+  border-radius:999px;
+  background:rgba(255,255,255,.18);
+  font-size:11.5px;
+  position:relative;
+  z-index:1;
+}
+.dot{width:6px;height:6px;border-radius:50%;background:#7CFFC4;display:inline-block;}
+
+/* ---------- 卡片 ---------- */
+.body-wrap{
+  padding:0 14px 30px;
+  margin-top:-44px;
+  position:relative;
+  z-index:2;
+}
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:17px 16px 18px;
+  margin-bottom:12px;
+  box-shadow:0 2px 10px rgba(74,63,143,.06);
+}
+.card-title{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  font-size:14.5px;
+  font-weight:600;
+  margin-bottom:13px;
+}
+.card-title .ic{
+  width:22px;height:22px;
+  border-radius:7px;
+  background:var(--purple-soft);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  flex:none;
+}
+.card-title .tip{
+  font-size:11.5px;
+  font-weight:400;
+  color:var(--ink-3);
+  margin-left:auto;
+}
+
+/* ---------- 星级 ---------- */
+.stars{
+  display:flex;
+  gap:7px;
+}
+.star-item{
+  flex:1;
+  border:1.5px solid var(--line);
+  border-radius:11px;
+  background:#FCFCFF;
+  padding:11px 4px 9px;
+  text-align:center;
+  cursor:pointer;
+  transition:.16s;
+}
+.star-item .stars-row{
+  display:block;
+  line-height:1;
+  letter-spacing:2px;
+  font-size:17px;
+  text-indent:2px;              /* 抵消末位字距，视觉居中 */
+  filter:grayscale(1);
+  opacity:.42;
+  transition:.16s;
+}
+.star-item .stars-row i{font-style:normal;color:#FFB400;}
+.star-item .stars-row i.off{color:#D9D6E8;}
+.star-item .lb{font-size:12.5px;color:var(--ink-2);margin-top:8px;display:block;}
+.star-item.on{
+  border-color:var(--purple);
+  background:var(--purple-soft);
+  box-shadow:0 2px 8px rgba(108,92,231,.14);
+}
+.star-item.on .stars-row{filter:none;opacity:1;transform:scale(1.08);}
+.star-item.on .lb{color:var(--purple-deep);font-weight:600;}
+
+/* ---------- 标签 ---------- */
+.tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.tag{
+  border:1.5px solid var(--line);
+  background:#FCFCFF;
+  color:var(--ink-2);
+  border-radius:999px;
+  padding:8px 13px;
+  font-size:13px;
+  cursor:pointer;
+  transition:.15s;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  user-select:none;
+}
+.tag .em{font-size:13px;filter:grayscale(.5);opacity:.6;transition:.15s;}
+.tag.on{
+  background:linear-gradient(135deg,#6C5CE7,#8878FF);
+  border-color:transparent;
+  color:#fff;
+  box-shadow:0 3px 10px rgba(108,92,231,.26);
+}
+.tag.on .em{filter:none;opacity:1;}
+.tag:active{transform:scale(.96);}
+
+/* ---------- 平台 ---------- */
+.plats{display:flex;gap:9px;}
+.plat{
+  flex:1;
+  border:1.5px solid var(--line);
+  border-radius:12px;
+  background:#FCFCFF;
+  padding:13px 6px 11px;
+  text-align:center;
+  cursor:pointer;
+  transition:.16s;
+}
+.plat .logo{
+  width:38px;height:38px;
+  border-radius:11px;
+  margin:0 auto 7px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:700;color:#fff;
+  letter-spacing:-.5px;
+}
+.plat .lb{font-size:12.5px;color:var(--ink-2);}
+.plat.on{
+  border-color:var(--purple);
+  background:var(--purple-soft);
+  box-shadow:0 3px 10px rgba(108,92,231,.14);
+}
+.plat.on .lb{color:var(--purple-deep);font-weight:600;}
+.logo-mt{background:#FFC300;color:#3A2E00 !important;}
+.logo-ct{background:#2B7BE4;}
+.logo-fz{background:#FF6A00;}
+
+/* ---------- 主按钮 ---------- */
+.main-btn{
+  width:100%;
+  border:none;
+  border-radius:13px;
+  background:linear-gradient(135deg,#6C5CE7,#8B7BFF);
+  color:#fff;
+  font-size:15.5px;
+  font-weight:600;
+  padding:15px;
+  cursor:pointer;
+  box-shadow:0 6px 18px rgba(108,92,231,.30);
+  transition:.16s;
+  font-family:inherit;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+}
+.main-btn:active{transform:scale(.985);}
+.main-btn:disabled{
+  background:#D9D5EA;
+  box-shadow:none;
+  cursor:not-allowed;
+  color:#fff;
+}
+.main-btn.loading{pointer-events:none;opacity:.85;}
+.hint{
+  text-align:center;
+  font-size:11.5px;
+  color:var(--ink-3);
+  margin-top:9px;
+}
+.spin{
+  width:14px;height:14px;
+  border:2px solid rgba(255,255,255,.4);
+  border-top-color:#fff;
+  border-radius:50%;
+  animation:sp .7s linear infinite;
+  display:inline-block;
+}
+@keyframes sp{to{transform:rotate(360deg);}}
+
+/* ---------- 结果 ---------- */
+#result{display:none;}
+#result.show{display:block;animation:rise .34s ease;}
+@keyframes rise{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+.copy-box{
+  background:#FAF9FE;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:13px 13px 9px;
+}
+#copyText{
+  width:100%;
+  border:none;
+  background:transparent;
+  resize:none;
+  font-family:inherit;
+  font-size:14px;
+  line-height:1.75;
+  color:var(--ink);
+  padding:0;
+  outline:none;
+  min-height:118px;
+}
+.count{
+  text-align:right;
+  font-size:11px;
+  color:var(--ink-3);
+  padding-top:4px;
+}
+.count.over{color:#E24B4A;font-weight:600;}
+#srcTag{transition:.2s;}
+#srcTag.ai{color:var(--green);font-weight:600;}
+#srcTag.local{color:var(--ink-3);}
+.row2{display:flex;gap:9px;margin-top:11px;}
+.btn{
+  flex:1;
+  border:none;
+  border-radius:11px;
+  padding:12px;
+  font-size:14px;
+  font-weight:600;
+  font-family:inherit;
+  cursor:pointer;
+  transition:.16s;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+}
+.btn:active{transform:scale(.97);}
+.btn-copy{background:var(--green);color:#fff;box-shadow:0 4px 12px rgba(24,160,88,.24);}
+.btn-copy.done{background:#0E7A42;}
+.btn-alt{background:var(--blue);color:#fff;box-shadow:0 4px 12px rgba(63,111,234,.22);}
+.btn-ghost{background:#F1EFFA;color:var(--purple-deep);box-shadow:none;}
+
+/* ---------- 跳转 ---------- */
+.jump-label{
+  font-size:12.5px;
+  color:var(--ink-2);
+  margin:16px 0 9px;
+  display:flex;align-items:center;gap:6px;
+}
+.jump-label::after{
+  content:"";
+  flex:1;height:1px;background:var(--line);
+}
+.jumps{display:flex;gap:9px;}
+.jump{
+  flex:1;
+  border:1.5px solid var(--line);
+  background:#fff;
+  border-radius:12px;
+  padding:12px 4px;
+  text-align:center;
+  cursor:pointer;
+  font-family:inherit;
+  font-size:12.5px;
+  color:var(--ink-2);
+  transition:.16s;
+}
+.jump .logo{width:30px;height:30px;border-radius:9px;margin:0 auto 6px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;}
+.jump.hot{
+  border-color:var(--purple);
+  background:var(--purple-soft);
+  box-shadow:0 3px 10px rgba(108,92,231,.16);
+}
+.jump.hot .lb{color:var(--purple-deep);font-weight:600;}
+.jump:active{transform:scale(.97);}
+
+/* ---------- 指引 ---------- */
+.guide{
+  background:#FFF9E8;
+  border:1px solid #FCEBB6;
+  border-radius:12px;
+  padding:13px 14px;
+  margin-top:14px;
+}
+.guide h4{
+  margin:0 0 9px;
+  font-size:12.5px;
+  color:#8A6100;
+  font-weight:600;
+  display:flex;align-items:center;gap:6px;
+}
+.guide ol{
+  margin:0;
+  padding-left:17px;
+  font-size:12.5px;
+  color:#7A5B10;
+  line-height:1.9;
+}
+.guide b{color:#5A4200;}
+
+/* ---------- 页脚 ---------- */
+.foot{
+  text-align:center;
+  font-size:11.5px;
+  color:var(--ink-3);
+  padding:6px 0 26px;
+}
+.foot .heart{color:#FF6B81;}
+
+/* ---------- Toast ---------- */
+#toast{
+  position:fixed;
+  left:50%;
+  bottom:78px;
+  transform:translate(-50%,14px);
+  background:rgba(31,27,46,.92);
+  color:#fff;
+  font-size:13px;
+  padding:10px 18px;
+  border-radius:10px;
+  opacity:0;
+  pointer-events:none;
+  transition:.24s;
+  z-index:99;
+  max-width:80vw;
+  text-align:center;
+}
+#toast.on{opacity:1;transform:translate(-50%,0);}
+
+/* ---------- 引导遮罩 ---------- */
+#wxmask{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(20,16,40,.9);
+  z-index:200;
+  padding:20px;
+  color:#fff;
+}
+#wxmask .arrow{
+  position:absolute;
+  right:20px;top:14px;
+  font-size:34px;
+  transform:rotate(-8deg);
+}
+#wxmask .txt{
+  margin-top:74px;
+  text-align:center;
+  font-size:15px;
+  line-height:2;
+}
+#wxmask .txt b{color:#FFD84D;}
+#wxmask .close{
+  display:block;
+  margin:26px auto 0;
+  background:rgba(255,255,255,.16);
+  border:none;color:#fff;
+  padding:10px 24px;border-radius:10px;
+  font-size:14px;font-family:inherit;
+}
+
+/* ---------- 补充信息（选填） ---------- */
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;}
+.fact{display:flex;flex-direction:column;gap:5px;min-width:0;}
+.fact span{font-size:11px;color:var(--ink-3);text-align:center;}
+.fact select{
+  width:100%;min-width:0;
+  border:1px solid var(--line);
+  background:var(--purple-soft);
+  color:var(--ink);
+  font-size:13px;font-family:inherit;
+  padding:9px 4px;border-radius:10px;
+  text-align:center;text-align-last:center;
+}
+.fact select:focus{outline:none;border-color:var(--purple-2);}
+.fact-note{
+  margin-top:9px;font-size:11px;color:var(--ink-3);
+  line-height:1.6;
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <header class="hero">
+    <h1>住得好 · 好评文案助手</h1>
+    <p>勾选你的真实感受，帮你写成一段自然的评价</p>
+    <span class="badge"><i class="dot"></i>基于真实体验，不做虚构内容</span>
+  </header>
+
+  <div class="body-wrap">
+
+    <section class="card">
+      <div class="card-title"><span class="ic">1</span>本次入住整体满意吗？</div>
+      <div class="stars" id="stars"></div>
+    </section>
+
+    <section class="card">
+      <div class="card-title">
+        <span class="ic">2</span>哪些方面让您满意？
+        <span class="tip" id="tagTip">可多选</span>
+      </div>
+      <div class="tags" id="tags"></div>
+    </section>
+
+    <section class="card">
+      <div class="card-title"><span class="ic">3</span>准备发布到哪个平台？</div>
+      <div class="plats" id="plats"></div>
+    </section>
+
+    <section class="card">
+      <div class="card-title">
+        <span class="ic">4</span>补充点实际情况
+        <span class="tip" id="factTip">选填</span>
+      </div>
+      <div class="facts">
+        <label class="fact"><span>出行目的</span><select id="fpurpose"></select></label>
+        <label class="fact"><span>同行的人</span><select id="fcompany"></select></label>
+        <label class="fact"><span>到店时间</span><select id="farrival"></select></label>
+      </div>
+      <div class="fact-note">不填也完全可以。填了会更像你自己写的——我们绝不会写你没说过的内容。</div>
+    </section>
+
+    <button class="main-btn" id="genBtn" disabled>🎉 一键生成好评文案</button>
+    <div class="hint" id="hint">请先选择满意度与平台</div>
+
+    <section class="card" id="result" style="margin-top:12px;">
+      <div class="card-title"><span class="ic">✍️</span>您的好评文案<span class="tip" id="srcTag">—</span></div>
+      <div class="copy-box">
+        <textarea id="copyText" spellcheck="false"></textarea>
+        <div class="count" id="count">0 / 500</div>
+      </div>
+      <div class="row2">
+        <button class="btn btn-copy" id="copyBtn">📋 复制文案</button>
+        <button class="btn btn-alt" id="altBtn">🔄 换一种</button>
+      </div>
+      <div class="row2" style="margin-top:9px;">
+        <button class="btn btn-ghost" id="resetBtn">↺ 重新选择</button>
+      </div>
+
+      <div class="jump-label">下一步：去平台粘贴评价</div>
+      <div class="jumps" id="jumps"></div>
+
+      <div class="guide">
+        <h4>📌 操作指引</h4>
+        <ol>
+          <li>文案已复制到剪贴板 ✅</li>
+          <li>点下方对应 App 按钮，自动跳转并复制</li>
+          <li>进入 <b>我的 → 待评价 / 订单</b> → 长按输入框粘贴 → 提交</li>
+        </ol>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="foot">
+    基于您的真实评价生成 <span class="heart">❤</span> 感谢您的反馈
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<div id="wxmask">
+  <div class="arrow">☝️</div>
+  <div class="txt">
+    请点击右上角 <b>「···」</b><br>选择 <b>在浏览器中打开</b><br>才能跳转到评价页面
+  </div>
+  <button class="close" id="maskClose">我知道了</button>
+</div>
+
+<script src="engine2.js?v=2"></script>
+<script>
+/* =========================================================
+   好评文案助手 · 纯前端实现
+   架构：静态单页（HTML + CSS + 原生 JS），零后端、零依赖
+   引擎：模板库 + 标签映射 + 随机重排（不调用大模型 API）
+   ========================================================= */
+
+/* ---------- 1. 满意度档位（只保留好评两档：非常满意=五星，满意=四星） ---------- */
+var LEVELS = [
+  { key:5, stars:5, label:'非常满意' },
+  { key:4, stars:4, label:'满意' }
+];
+
+/* ---------- 2. 满意维度标签（12 项，对应视频原型） ---------- */
+var TAGS = [
+  { key:'性价比高', em:'💰', w:1, sentences:[
+    '对比了周边好几家酒店，这家性价比最高',
+    '这个价位能有这样的房间，性价比是真的高',
+    '价格便宜但品质一点不打折，花得值'
+  ]},
+  { key:'卫生干净', em:'🧹', w:3, sentences:[
+    '房间卫生做得很到位，床单被套干净，卫生间也没有异味',
+    '打扫得很仔细，桌面、地面、卫生间都挑不出毛病',
+    '卫生方面让人很放心，看着就很清爽'
+  ]},
+  { key:'服务热情', em:'😊', w:4, sentences:[
+    '前台服务态度热情但不谄媚，让人感觉很舒服',
+    '办理入住很快，工作人员有问必答，态度特别好',
+    '入住时详细讲解了房间设施的使用方法，很专业'
+  ]},
+  { key:'床品舒服', em:'🛏️', w:3, sentences:[
+    '床垫软硬适中，枕头也舒服，一觉睡到自然醒',
+    '被子蓬松柔软，盖着很踏实，躺下就不想起来',
+    '床品质量很好，睡得特别沉'
+  ]},
+  { key:'安静舒适', em:'😌', w:3, sentences:[
+    '隔音做得不错，晚上很安静，睡了个好觉',
+    '整体环境不吵，走廊和隔壁的声音基本听不到',
+    '房间安静、灯光柔和，住着很放松'
+  ]},
+  { key:'设施齐全', em:'🛋️', w:2, sentences:[
+    '房间设施很齐全，该有的都有，还配了免费茶水',
+    '设施比较新，空调、热水、吹风机一应俱全',
+    '配套很完整，办公和休息都照顾到了'
+  ]},
+  { key:'交通便利', em:'🚇', w:5, sentences:[
+    '地理位置很好找，导航直接到门口，出行很方便',
+    '交通便利，打车坐公交都方便，去附近商圈也近',
+    '离地铁站步行几分钟就到，通勤很省时间'
+  ]},
+  { key:'早餐好吃', em:'🍳', w:5, sentences:[
+    '早餐种类挺丰富，热乎现做，吃饱了有力气出门',
+    '早餐是加分项，中西式都有，味道不错',
+    '早餐小菜和面点都很新鲜，吃得很满足'
+  ]},
+  { key:'热水充足', em:'🚿', w:4, sentences:[
+    '热水来得快，水压也足，洗澡很舒服',
+    '24 小时热水稳定，水量大，冲个澡很解乏',
+    '热水充足这点很加分，随时都能洗上热水澡'
+  ]},
+  { key:'停车方便', em:'🅿️', w:5, sentences:[
+    '楼下就能停车，车位好找，自驾过来很省心',
+    '有停车场，免费停车这点很实在',
+    '停车方便，不用绕圈找车位'
+  ]},
+  { key:'WiFi快', em:'📶', w:5, sentences:[
+    'WiFi 信号满格，刷视频、处理工作都不卡',
+    '网速很快，看剧一点不转圈',
+    'WiFi 很稳定，连着开会也没断过'
+  ]},
+  { key:'周边好玩', em:'🎡', w:5, sentences:[
+    '周边吃喝玩乐都很多，晚上出门逛街很方便',
+    '附近有小吃街和商场，逛吃逛吃很方便',
+    '下楼就有好吃的，生活气息很浓'
+  ]}
+];
+
+/* ---------- 3. 开场句 / 感受句 / 结尾句 / 连接词 ----------
+   分工原则：开场只交代场景（不含评价词），感受句承担总评，
+   结尾句负责推荐与复购 —— 三层各司其职，避免语义重复。      */
+var OPENERS = [
+  '出差顺路订的这家。',
+  '这次出来玩订的这家。',
+  '朋友推荐来的这家。',
+  '临时订的这家酒店。',
+  '这次过来办事订的这家。'
+];
+
+var FEELINGS = [
+  '整体住下来挺满意的。',
+  '住得比预期要好。',
+  '这一晚住得挺舒服。',
+  '总体感觉不错。'
+];
+
+var CLOSERS = [
+  '总体比较省心，给后来入住的人一个真实参考。',
+  '下次来这边还会再选这家，也推荐给大家。',
+  '总的来说很满意，值得推荐给朋友。',
+  '体验超出预期，之后有需要还会再来。',
+  '写下来给后面的朋友参考一下。'
+];
+
+var LINKERS = ['另外，', '还有，', '再就是，', '而且，'];
+
+/* ---------- 4. 发布平台 + 深链 ---------- */
+var PLATFORMS = [
+  {
+    key:'meituan', name:'美团', short:'美团', cls:'logo-mt',
+    scheme:'imeituan://www.meituan.com/',
+    web:'https://i.meituan.com/',
+    guide:'美团 → 我的 → 待评价/我的订单 → 找到该酒店 → 粘贴文案 → 提交'
+  },
+  {
+    key:'ctrip', name:'携程', short:'携程', cls:'logo-ct',
+    scheme:'ctrip://wireless/',
+    web:'https://m.ctrip.com/',
+    guide:'携程 → 我的 → 待点评 → 找到该酒店 → 粘贴文案 → 提交'
+  },
+  {
+    key:'fliggy', name:'飞猪', short:'飞猪', cls:'logo-fz',
+    scheme:'fliggy://',
+    web:'https://www.fliggy.com/',
+    guide:'飞猪 → 我的 → 待评价 → 找到该酒店 → 粘贴文案 → 提交'
+  }
+];
+
+/* ---------- 5. 状态 ---------- */
+var state = { level:0, tags:[], platform:null, purpose:'', company:'', arrival:'' };
+var lastUsed = [];        /* 记录上次用过的句子，避免“换一种”重复 */
+var localHistory = [];    /* 本地生成历史，供引擎的相似度闸门避重 */
+
+/* ---------- 补充信息选项（白名单：只允许顾客明确选中的项进入文案） ---------- */
+var FACTS_UI = {
+  purpose: ['出差','旅游','探亲','参加考试','周末短途','办事路过','朋友聚会','看演出'],
+  company: ['一个人','和同事一起','和家人一起','和朋友一起','和对象一起','带着孩子','和父母一起'],
+  arrival: ['中午到店','下午到店','傍晚到店','深夜到店','一大清早到店','赶了一天的路']
+};
+
+/* ---------- 6. 工具函数 ---------- */
+function $(id){ return document.getElementById(id); }
+
+function pickUnique(arr, used){
+  if(!arr.length) return '';
+  var pool = arr.filter(function(s){ return used.indexOf(s) === -1; });
+  if(!pool.length) pool = arr;
+  var s = pool[Math.floor(Math.random() * pool.length)];
+  used.push(s);
+  return s;
+}
+
+function rnd(arr){ return arr[Math.floor(Math.random() * arr.length)]; }
+
+function toast(msg){
+  var t = $('toast');
+  t.textContent = msg;
+  t.classList.add('on');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(function(){ t.classList.remove('on'); }, 1800);
+}
+
+function isWeChat(){
+  return /MicroMessenger/i.test(navigator.userAgent);
+}
+
+/* ---------- 7. 渲染 ---------- */
+function renderStars(){
+  $('stars').innerHTML = LEVELS.map(function(l){
+    var row = '';
+    for(var i = 1; i <= 5; i++){
+      row += '<i' + (i <= l.stars ? '' : ' class="off"') + '>★</i>';
+    }
+    return '<div class="star-item' + (state.level === l.key ? ' on' : '') + '" data-k="' + l.key + '">' +
+           '<span class="stars-row">' + row + '</span>' +
+           '<span class="lb">' + l.label + '</span></div>';
+  }).join('');
+}
+
+function renderTags(){
+  $('tags').innerHTML = TAGS.map(function(t){
+    var on = state.tags.indexOf(t.key) > -1;
+    return '<div class="tag' + (on ? ' on' : '') + '" data-k="' + t.key + '">' +
+           '<span class="em">' + t.em + '</span>' + t.key + '</div>';
+  }).join('');
+  $('tagTip').textContent = state.tags.length ? '已选 ' + state.tags.length + ' 项' : '可多选';
+}
+
+function renderPlats(){
+  $('plats').innerHTML = PLATFORMS.map(function(p){
+    var on = state.platform === p.key;
+    return '<div class="plat' + (on ? ' on' : '') + '" data-k="' + p.key + '">' +
+           '<div class="logo ' + p.cls + '">' + p.short + '</div>' +
+           '<div class="lb">' + p.name + '</div></div>';
+  }).join('');
+}
+
+function renderJumps(){
+  var p = PLATFORMS.filter(function(x){ return x.key === state.platform; })[0] || PLATFORMS[0];
+  $('jumps').innerHTML = PLATFORMS.map(function(x){
+    return '<button class="jump' + (x.key === p.key ? ' hot' : '') + '" data-k="' + x.key + '">' +
+           '<div class="logo ' + x.cls + '">' + x.short + '</div>' +
+           '<span class="lb">打开' + x.name + 'App</span></button>';
+  }).join('');
+}
+
+function renderFacts(){
+  [['fpurpose','purpose'], ['fcompany','company'], ['farrival','arrival']].forEach(function(pair){
+    var el = $(pair[0]);
+    if(!el) return;
+    var html = ['<option value="">不填</option>'];
+    FACTS_UI[pair[1]].forEach(function(v){
+      html.push('<option value="' + v + '">' + v + '</option>');
+    });
+    el.innerHTML = html.join('');
+    el.value = state[pair[1]] || '';
+  });
+}
+
+/* ---------- 8. 文案生成引擎 ---------- */
+function orderTags(keys){
+  /* 按 w 值排序：先总评/位置，再硬件，最后服务 —— 让文案阅读顺序自然 */
+  return TAGS.filter(function(t){ return keys.indexOf(t.key) > -1; })
+             .sort(function(a,b){ return a.w - b.w; });
+}
+
+function buildCopy(){
+  var used = lastUsed.slice();   /* 继承上轮已用句子，保证“换一种”不重复 */
+  var chosen = orderTags(state.tags).slice(0, 6);   /* 最多 6 个维度，控制长度 */
+  var usedLinkers = [];
+  var sents = [];
+
+  for(var i = 0; i < chosen.length; i++){
+    var s = pickUnique(chosen[i].sentences, used);
+    /* 每 3 句加一个连接词，且四个连接词不重复使用 */
+    if(i > 0 && i % 3 === 1){
+      var avail = LINKERS.filter(function(l){ return usedLinkers.indexOf(l) === -1; });
+      if(avail.length){
+        var lk = rnd(avail);
+        usedLinkers.push(lk);
+        s = lk + s;
+      }
+    }
+    sents.push(s);
+  }
+
+  var text = pickUnique(OPENERS, used);
+  if(sents.length) text += sents.join('。') + '。';
+  text += pickUnique(FEELINGS, used);
+  text += pickUnique(CLOSERS, used);
+
+  lastUsed = used.slice(-30);   /* 只保留最近的记录，避免池子被掏空 */
+  return text;
+}
+
+/* ---------- 9. 生成流程（AI 优先，本地模板兜底） ---------- */
+var lastText = '';        /* 上一次生成的文案，用于让模型避开雷同 */
+var MIN_BUSY = 450;       /* loading 最短展示时间，避免闪烁 */
+
+function canGenerate(){
+  return state.level >= 4 && state.platform && state.tags.length > 0;
+}
+
+function updateBtn(){
+  var ok = canGenerate();
+  $('genBtn').disabled = !ok;
+  if(!ok){
+    if(!state.level) $('hint').textContent = '请先选择满意度与平台';
+    else if(!state.platform) $('hint').textContent = '请选择要发布的平台';
+    else $('hint').textContent = '请至少勾选一个满意的方面';
+  } else {
+    $('hint').textContent = '将基于你勾选的真实感受撰写';
+  }
+}
+
+function setBusy(busy){
+  var btn = $('genBtn');
+  btn.classList.toggle('loading', busy);
+  btn.innerHTML = busy
+    ? '<span class="spin"></span> 正在撰写…'
+    : '🎉 一键生成好评文案';
+  if(busy) btn.disabled = true;
+  else updateBtn();   /* 结束后按当前选择恢复正确的可用状态 */
+}
+
+function showResult(text, source, note){
+  $('copyText').value = text;
+  lastText = text;
+  updateCount();
+  $('result').classList.add('show');
+  renderJumps();
+
+  var tag = $('srcTag');
+  tag.textContent = source === 'ai' ? 'AI 生成' : '本地模板';
+  tag.className = 'tip ' + (source === 'ai' ? 'ai' : 'local');
+
+  autoCopy(text, false);
+  toast(note || (source === 'ai' ? 'AI 已写完并复制，去粘贴吧' : '已生成并复制'));
+
+  $('result').scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+/* 收集用户填写的真实信息；未填的为空串，服务端不会使用，模型也禁止编造 */
+function currentFacts(){
+  return {
+    purpose: state.purpose || '',
+    company: state.company || '',
+    arrival: state.arrival || ''
+  };
+}
+
+/* 本地降级引擎：升级版（词级槽位 + 相似度闸门），零依赖、不调用模型 */
+function localGenerate(){
+  if(window.Engine2 && window.Engine2.generate){
+    var text = window.Engine2.generate(state.tags, {
+      facts: currentFacts(), history: localHistory, maxSim: 0.30, tries: 12
+    });
+    if(text){
+      localHistory.push(text);
+      if(localHistory.length > 50) localHistory.shift();
+      return text;
+    }
+  }
+  return buildCopy();   /* 极端兜底：引擎未加载成功时退回旧引擎 */
+}
+
+/* ============================================================
+   静态部署模式（GitHub Pages 等）
+   —— 无服务端、无 API 密钥，文案全部由本地模板引擎即时生成
+   ============================================================ */
+
+/* 返回 Promise 以保持调用链一致；静态模式下直接给结果，无需等待 */
+function requestAI(){
+  return Promise.resolve({ ok:true, text:localGenerate(), source:'static' });
+}
+
+/* 静态模式下本地引擎即时出结果，无需 loading 态 */
+function generate(){
+  if(!canGenerate()) return;
+  try{
+    showResult(localGenerate(), 'local');
+  }catch(e){
+    showResult(buildCopy(), 'local', '已用基础模板生成');
+  }
+}
+
+function updateCount(){
+  var n = $('copyText').value.length;
+  var el = $('count');
+  el.textContent = n + ' / 500';
+  el.classList.toggle('over', n > 500);
+}
+
+/* ---------- 10. 复制 ---------- */
+function autoCopy(text, silent){
+  if(navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(text).then(function(){
+      if(!silent) markCopied();
+    }).catch(function(){ fallbackCopy(text, silent); });
+  } else {
+    fallbackCopy(text, silent);
+  }
+}
+
+function fallbackCopy(text, silent){
+  var ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.left = '-9999px';
+  document.body.appendChild(ta);
+  ta.select();
+  try{ document.execCommand('copy'); if(!silent) markCopied(); }catch(e){}
+  document.body.removeChild(ta);
+}
+
+function markCopied(){
+  var b = $('copyBtn');
+  b.classList.add('done');
+  b.textContent = '✅ 已复制';
+  setTimeout(function(){
+    b.classList.remove('done');
+    b.textContent = '📋 复制文案';
+  }, 1800);
+}
+
+/* ---------- 11. 深链跳转 ---------- */
+function openPlatform(key){
+  var p = PLATFORMS.filter(function(x){ return x.key === key; })[0];
+  if(!p) return;
+
+  /* 跳转前再复制一次，确保剪贴板内容是最新的 */
+  autoCopy($('copyText').value, true);
+
+  if(isWeChat()){
+    $('wxmask').style.display = 'block';
+    return;
+  }
+
+  var t0 = Date.now();
+  var bail = setTimeout(function(){
+    /* 2.4s 内页面仍可见 → 说明 App 未拉起，降级到网页版 */
+    if(!document.hidden && Date.now() - t0 < 3000){
+      location.href = p.web;
+    }
+  }, 2400);
+
+  document.addEventListener('visibilitychange', function onHide(){
+    if(document.hidden){ clearTimeout(bail); document.removeEventListener('visibilitychange', onHide); }
+  });
+
+  try{ location.href = p.scheme; }catch(e){ clearTimeout(bail); location.href = p.web; }
+
+  toast('文案已复制，去 ' + p.name + ' 粘贴吧');
+}
+
+/* ---------- 12. 事件绑定 ---------- */
+function bind(){
+  $('stars').addEventListener('click', function(e){
+    var el = e.target.closest('.star-item');
+    if(!el) return;
+    state.level = parseInt(el.dataset.k, 10);
+    renderStars();
+    updateBtn();
+  });
+
+  $('tags').addEventListener('click', function(e){
+    var el = e.target.closest('.tag');
+    if(!el) return;
+    var k = el.dataset.k;
+    var i = state.tags.indexOf(k);
+    if(i > -1) state.tags.splice(i, 1);
+    else state.tags.push(k);
+    renderTags();
+    updateBtn();
+  });
+
+  $('plats').addEventListener('click', function(e){
+    var el = e.target.closest('.plat');
+    if(!el) return;
+    state.platform = el.dataset.k;
+    renderPlats();
+    renderJumps();
+    updateBtn();
+  });
+
+  $('jumps').addEventListener('click', function(e){
+    var el = e.target.closest('.jump');
+    if(!el) return;
+    openPlatform(el.dataset.k);
+  });
+
+  [['fpurpose','purpose'], ['fcompany','company'], ['farrival','arrival']].forEach(function(pair){
+    var el = $(pair[0]);
+    if(!el) return;
+    el.addEventListener('change', function(){
+      state[pair[1]] = el.value;
+      var filled = state.purpose || state.company || state.arrival;
+      $('factTip').textContent = filled ? '已补充' : '选填';
+    });
+  });
+
+  $('genBtn').addEventListener('click', generate);
+
+  $('copyBtn').addEventListener('click', function(){
+    autoCopy($('copyText').value, false);
+    toast('文案已复制到剪贴板');
+  });
+
+  $('altBtn').addEventListener('click', function(){
+    if(!state.tags.length){ toast('请先勾选满意的方面'); return; }
+    var btn = $('altBtn');
+    btn.disabled = true;
+    btn.textContent = '正在重写…';
+
+    showResult(localGenerate(), 'local', '已换一种表达，并自动复制');
+    btn.disabled = false;
+    btn.textContent = '🔄 换一种';
+  });
+
+  $('resetBtn').addEventListener('click', function(){
+    state = { level:0, tags:[], platform:null, purpose:'', company:'', arrival:'' };
+    lastUsed = [];
+    lastText = '';
+    localHistory = [];
+    renderStars(); renderTags(); renderPlats(); renderFacts();
+    $('factTip').textContent = '选填';
+    $('result').classList.remove('show');
+    updateBtn();
+    window.scrollTo({ top:0, behavior:'smooth' });
+  });
+
+  $('copyText').addEventListener('input', updateCount);
+
+  $('maskClose').addEventListener('click', function(){
+    $('wxmask').style.display = 'none';
+  });
+}
+
+/* ---------- 13. 启动 ---------- */
+renderStars();
+renderTags();
+renderPlats();
+renderFacts();
+renderJumps();
+bind();
+
+/* 微信内直接给出提示，避免用户白点跳转按钮 */
+if(isWeChat()){
+  setTimeout(function(){
+    if(!sessionStorage.getItem('wx_tip')){
+      $('wxmask').style.display = 'block';
+      sessionStorage.setItem('wx_tip','1');
+    }
+  }, 900);
+}
+</script>
+</body>
+</html>
